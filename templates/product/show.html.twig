@@ -1,0 +1,14 @@
+{# templates/product/show.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalle del Producto{% endblock %}
+
+{% block body %}
+  <h1>Detalle del Producto</h1>
+  <p><strong>Nombre:</strong> {{ product.name }}</p>
+  <p><strong>Precio:</strong> {{ product.price }} USD</p>
+  {% if product.category_name %}
+    <p><strong>Categoría:</strong> {{ product.category_name }}</p>
+  {% endif %}
+  <a href="{{ path('product_index') }}">Volver al listado</a>
+{% endblock %}
