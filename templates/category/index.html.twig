@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorías{% endblock %}
+
+{% block body %}
+    <h2>Listado de Categorías</h2>
+    <a class="button" href="{{ path('category_new') }}">Nueva Categoría</a>
+    <ul>
+        {% for category in categories %}
+            <li>
+                <div>
+                    <strong>{{ category.name }}</strong>
+                </div>
+                <div>
+                    <a class="button" href="{{ path('category_show', {'id': category.id}) }}">Ver</a>
+                    <a class="button" href="{{ path('category_edit', {'id': category.id}) }}">Editar</a>
+                    <form action="{{ path('category_delete', {'id': category.id}) }}" method="post" onsubmit="return confirm('¿Seguro que deseas eliminar esta categoría?');" style="display:inline">
+                        <input type="submit" value="Borrar">
+                    </form>
+                </div>
+            </li>
+        {% else %}
+            <li>No hay categorías disponibles.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

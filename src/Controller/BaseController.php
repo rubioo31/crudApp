@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class BaseController extends AbstractController
 {
     /*
-      Retorna una conexión PDO usando las variables de entorno.
+      Retorna una conexion PDO usando las variables de entorno.
      */
     protected function getConnection(): \PDO
     {

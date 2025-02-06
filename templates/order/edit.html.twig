@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Orden{% endblock %}
+
+{% block body %}
+    <h2>Editar Orden</h2>
+    <form method="post">
+        <div class="form-group">
+            <label for="product_id">Producto:</label>
+            <select name="product_id" id="product_id" required>
+                {% for product in products %}
+                    <option value="{{ product.id }}" {% if product.id == order.product_id %}selected{% endif %}>{{ product.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="quantity">Cantidad:</label>
+            <input type="number" name="quantity" id="quantity" value="{{ order.quantity }}" required>
+        </div>
+        <input type="submit" value="Actualizar">
+    </form>
+    <a class="button" href="{{ path('order_index') }}">Volver</a>
+{% endblock %}

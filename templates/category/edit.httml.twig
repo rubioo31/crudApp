@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Categoría{% endblock %}
+
+{% block body %}
+    <h2>Editar Categoría</h2>
+    <form method="post">
+        <div class="form-group">
+            <label for="name">Nombre de la categoría:</label>
+            <input type="text" name="name" id="name" value="{{ category.name }}" required>
+        </div>
+        <input type="submit" value="Actualizar">
+    </form>
+    <a class="button" href="{{ path('category_index') }}">Volver</a>
+{% endblock %}

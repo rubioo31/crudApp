@@ -1,26 +1,27 @@
-{# templates/base.html.twig #}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}CRUD Excepcional{% endblock %}</title>
+    <title>{% block title %}CRUD{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Enlazar CSS externo -->
+    <!-- Enlace al archivo CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {% block extra_head %}{% endblock %}
 </head>
 <body>
     <header>
-        <h1>{% block header_title %}CRUDAPP{% endblock %}</h1>
+        <h1>{% block header_title %}CRUD{% endblock %}</h1>
         <nav>
-            <a href="{{ path('product_index') }}">Inicio</a>
-            <a href="{{ path('product_new') }}">Nuevo Producto</a>
+            <!-- Enlaces de navegación -->
+            <a class="button" href="{{ path('product_index') }}">Productos</a>
+            <a class="button" href="{{ path('category_index') }}">Categorías</a>
+            <a class="button" href="{{ path('order_index') }}">Órdenes</a>
         </nav>
     </header>
     <div class="container">
         {% block body %}{% endblock %}
     </div>
-    <!-- Enlazar JavaScript externo -->
+    <!-- Enlace al archivo JavaScript -->
     <script src="{{ asset('js/script.js') }}"></script>
     {% block extra_scripts %}{% endblock %}
 </body>

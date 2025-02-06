@@ -14,10 +14,10 @@ class ProductController extends BaseController
     public function index(): Response
     {
         $pdo = $this->getConnection();
-        $stmt = $pdo->query("SELECT p.*, c.name AS category_name 
+        $consulta = $pdo->query("SELECT p.*, c.name AS category_name 
                              FROM products p 
                              LEFT JOIN categories c ON p.category_id = c.id");
-        $products = $stmt->fetchAll();
+        $products = $consulta->fetchAll();
 
         return $this->render('product/index.html.twig', [
             'products' => $products,
@@ -37,11 +37,11 @@ class ProductController extends BaseController
             $price       = $request->request->get('price');
             $category_id = $request->request->get('category_id');
 
-            // Validación simple
+            // Validacion simple
             if (!empty($name) && is_numeric($price)) {
-                $stmt = $pdo->prepare("INSERT INTO products (name, price, category_id) 
+                $consulta = $pdo->prepare("INSERT INTO products (name, price, category_id) 
                                        VALUES (:name, :price, :category_id)");
-                $stmt->execute([
+                $consulta->execute([
                     'name'        => $name,
                     'price'       => $price,
                     'category_id' => $category_id ? $category_id : null,
@@ -50,9 +50,9 @@ class ProductController extends BaseController
             }
         }
 
-        // Para el formulario, obtenemos las categorías para seleccionar
-        $stmt = $pdo->query("SELECT * FROM categories");
-        $categories = $stmt->fetchAll();
+        // Para el formulario, obtenemos las categorias para seleccionar
+        $consulta = $pdo->query("SELECT * FROM categories");
+        $categories = $consulta->fetchAll();
 
         return $this->render('product/new.html.twig', [
             'categories' => $categories,
@@ -66,12 +66,12 @@ class ProductController extends BaseController
     public function show($id): Response
     {
         $pdo = $this->getConnection();
-        $stmt = $pdo->prepare("SELECT p.*, c.name AS category_name 
+        $consulta = $pdo->prepare("SELECT p.*, c.name AS category_name 
                                FROM products p 
                                LEFT JOIN categories c ON p.category_id = c.id 
                                WHERE p.id = :id");
-        $stmt->execute(['id' => $id]);
-        $product = $stmt->fetch();
+        $consulta->execute(['id' => $id]);
+        $product = $consulta->fetch();
 
         if (!$product) {
             throw $this->createNotFoundException("Producto no encontrado");
@@ -89,9 +89,9 @@ class ProductController extends BaseController
     public function edit(Request $request, $id): Response
     {
         $pdo = $this->getConnection();
-        $stmt = $pdo->prepare("SELECT * FROM products WHERE id = :id");
-        $stmt->execute(['id' => $id]);
-        $product = $stmt->fetch();
+        $consulta = $pdo->prepare("SELECT * FROM products WHERE id = :id");
+        $consulta->execute(['id' => $id]);
+        $product = $consulta->fetch();
 
         if (!$product) {
             throw $this->createNotFoundException("Producto no encontrado");
@@ -103,10 +103,10 @@ class ProductController extends BaseController
             $category_id = $request->request->get('category_id');
 
             if (!empty($name) && is_numeric($price)) {
-                $stmt = $pdo->prepare("UPDATE products 
+                $consulta = $pdo->prepare("UPDATE products 
                                        SET name = :name, price = :price, category_id = :category_id 
                                        WHERE id = :id");
-                $stmt->execute([
+                $consulta->execute([
                     'name'        => $name,
                     'price'       => $price,
                     'category_id' => $category_id ? $category_id : null,
@@ -116,9 +116,9 @@ class ProductController extends BaseController
             }
         }
 
-        // Obtener la lista de categorías para el formulario
-        $stmt = $pdo->query("SELECT * FROM categories");
-        $categories = $stmt->fetchAll();
+        // Obtener la lista de categorias para el formulario
+        $consulta = $pdo->query("SELECT * FROM categories");
+        $categories = $consulta->fetchAll();
 
         return $this->render('product/edit.html.twig', [
             'product'    => $product,
@@ -134,10 +134,10 @@ class ProductController extends BaseController
     {
         $pdo = $this->getConnection();
 
-        // Opcional: aquí se podría validar un token CSRF
+        // Opcional: aqui se podria validar un token CSRF
 
-        $stmt = $pdo->prepare("DELETE FROM products WHERE id = :id");
-        $stmt->execute(['id' => $id]);
+        $consulta = $pdo->prepare("DELETE FROM products WHERE id = :id");
+        $consulta->execute(['id' => $id]);
 
         return $this->redirectToRoute('product_index');
     }

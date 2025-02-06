@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Órdenes{% endblock %}
+
+{% block body %}
+    <h2>Listado de Órdenes</h2>
+    <a class="button" href="{{ path('order_new') }}">Nueva Orden</a>
+    <ul>
+        {% for order in orders %}
+            <li>
+                <div>
+                    <strong>Orden #{{ order.id }}</strong>
+                    <span>Producto: {{ order.product_name }}</span>
+                    <span>Cantidad: {{ order.quantity }}</span>
+                    <span>Fecha: {{ order.order_date|date('Y-m-d H:i') }}</span>
+                </div>
+                <div>
+                    <a class="button" href="{{ path('order_show', {'id': order.id}) }}">Ver</a>
+                    <a class="button" href="{{ path('order_edit', {'id': order.id}) }}">Editar</a>
+                    <form action="{{ path('order_delete', {'id': order.id}) }}" method="post" onsubmit="return confirm('¿Seguro que deseas eliminar esta orden?');" style="display:inline">
+                        <input type="submit" value="Borrar">
+                    </form>
+                </div>
+            </li>
+        {% else %}
+            <li>No hay órdenes disponibles.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
