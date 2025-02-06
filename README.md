@@ -20,7 +20,11 @@ La estructura del proyecto es la siguiente:
 ```
 /crudApp
 ├── assets
-│   └── ...                                       # Archivos de configuracion de Symfony
+│   ├── controllers
+│   ├── scrips
+│   |   └── script.js                             # Script para una transicion
+│   └── styles
+|       └── style.css                             # Estilos de todo mi programa
 ├── bin
 │   └── ...                                       # Archivos de configuracion de Symfony
 ├── config
@@ -28,10 +32,9 @@ La estructura del proyecto es la siguiente:
 ├── database
 │   └── dbCrudApp.sql                             # Codigo SQL para la creacion de la base de datos y tablas
 ├── public
-│   ├── css
-│   │   └── style.css                             # Estilos CSS para la aplicacion
-│   ├── js
-│   │   └── script.js                             # Scripts JavaScript para efectos y animaciones
+│   ├── assets
+|   |   ├── scrips                                # Scrips compilados para la aplicacion
+│   │   └── styles                                # Estilos compilados CSS para la aplicacion
 │   └── index.php                                 # Front controller de Symfony
 ├── src
 │   └── Controller
@@ -128,9 +131,17 @@ La aplicacion se divide en tres modulos principales:
 - `POST /order/{id}/delete` → Accion para eliminar una orden.
 
 ### Probar y Verificar la Aplicacion
+
 Instalo paquetes que uso como por ejemplo:
+
 ```bash
 composer require symfony/http-foundation symfony/routing
+```
+
+Compilo los estilos y los scrips que uso en la aplicacion ubicados en `/assets`
+
+```bash
+php bin/console asset-map:compile
 ```
 
 Levanto el Servidor de Desarrollo:

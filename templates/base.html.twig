@@ -5,7 +5,7 @@
     <title>{% block title %}CRUD{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Enlace al archivo CSS -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/style.css') }}">
     {% block extra_head %}{% endblock %}
 </head>
 <body>
@@ -22,7 +22,7 @@
         {% block body %}{% endblock %}
     </div>
     <!-- Enlace al archivo JavaScript -->
-    <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('scripts/script.js') }}"></script>
     {% block extra_scripts %}{% endblock %}
 </body>
 </html>
