@@ -1,26 +1,29 @@
-{# templates/product/index.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Listado de Productos{% endblock %}
 
 {% block body %}
-  <h1>Productos</h1>
-  <a href="{{ path('product_new') }}">Crear nuevo producto</a>
-  <ul>
-    {% for product in products %}
-      <li>
-        <strong>{{ product.name }}</strong> – {{ product.price }} USD 
-        {% if product.category_name %}
-          (Categoría: {{ product.category_name }})
-        {% endif %}
-        <a href="{{ path('product_show', {'id': product.id}) }}">Ver</a>
-        <a href="{{ path('product_edit', {'id': product.id}) }}">Editar</a>
-        <form action="{{ path('product_delete', {'id': product.id}) }}" method="post" style="display:inline">
-          <button type="submit">Borrar</button>
-        </form>
-      </li>
-    {% else %}
-      <li>No hay productos.</li>
-    {% endfor %}
-  </ul>
+    <h2>Listado de Productos</h2>
+    <a class="button" href="{{ path('product_new') }}">Crear Nuevo Producto</a>
+    <ul>
+        {% for product in products %}
+            <li>
+                <div>
+                    <strong>{{ product.name }}</strong> – {{ product.price }} €
+                    {% if product.category_name %}
+                        <span>(Categoría: {{ product.category_name }})</span>
+                    {% endif %}
+                </div>
+                <div>
+                    <a class="button" href="{{ path('product_show', {'id': product.id}) }}">Ver</a>
+                    <a class="button" href="{{ path('product_edit', {'id': product.id}) }}">Editar</a>
+                    <form action="{{ path('product_delete', {'id': product.id}) }}" method="post" onsubmit="return confirm('¿Seguro que deseas eliminar este producto?');" style="display:inline">
+                        <input type="submit" value="Borrar">
+                    </form>
+                </div>
+            </li>
+        {% else %}
+            <li>No hay productos disponibles.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
