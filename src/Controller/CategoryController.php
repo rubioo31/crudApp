@@ -49,7 +49,7 @@ class CategoryController extends BaseController
         $category = $consulta->fetch();
 
         if (!$category) {
-            throw $this->createNotFoundException("Categoría no encontrada");
+            throw $this->createNotFoundException("Categoria no encontrada");
         }
 
         return $this->render('category/show.html.twig', [
@@ -66,7 +66,7 @@ class CategoryController extends BaseController
         $category = $consulta->fetch();
 
         if (!$category) {
-            throw $this->createNotFoundException("Categoría no encontrada");
+            throw $this->createNotFoundException("Categoria no encontrada");
         }
 
         if ($request->isMethod('POST')) {

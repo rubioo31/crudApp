@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Órdenes{% endblock %}
+{% block title %}ordenes{% endblock %}
 
 {% block body %}
-    <h2>Listado de Órdenes</h2>
+    <h2>Listado de ordenes</h2>
     <a class="button" href="{{ path('order_new') }}">Nueva Orden</a>
     <ul>
         {% for order in orders %}
@@ -23,7 +23,7 @@
                 </div>
             </li>
         {% else %}
-            <li>No hay órdenes disponibles.</li>
+            <li>No hay ordenes disponibles.</li>
         {% endfor %}
     </ul>
 {% endblock %}
