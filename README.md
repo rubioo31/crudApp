@@ -2,13 +2,13 @@
 
 Esta aplicacion me permite gestionar los recursos de un sistema de inventario y ventas: **productos**, **categorias** y **ordenes**. La desarrolle en PHP utilizando el framework Symfony y PDO para la conexion a MySQL (sin emplear Doctrine para el mapeo de entidades). La aplicacion esta organizada en controladores y plantillas Twig, y cuenta con assets (CSS y JavaScript) para mejorar la interfaz de usuario.
 
-> **ADVERTENCIA**  
+> [!WARNING] 
 > - Ejecuto el script SQL incluido en la carpeta `database` para crear la base de datos y las tablas necesarias.
 >
-> **NOTA**  
+> [!NOTE]
 > - La aplicacion utiliza Symfony, por lo que el archivo `public/index.php` actua como front controller. Las rutas definidas en los controladores gestionan las distintas funcionalidades.
 >
-> **IMPORTANTE**  
+> [!IMPORTANT] 
 > - Me aseguro de configurar correctamente las variables de entorno en el archivo `.env` o `.env.local` para la conexion a la base de datos.
 
 ---
