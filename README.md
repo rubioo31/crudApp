@@ -86,7 +86,7 @@ Usamos PHP de XAMPP para la instalacion y la metemos en la variable PATH del ord
 5. Reiniciamos la consola para que se apliquen las variables PATH
 ```
 
-Puedo crear el proyecto utilizando Composer, vamos al directorio donde queramos desplegarlo:
+Creo el proyecto utilizando Composer en el directorio que queramos:
 
 ```bash
 composer create-project symfony/website-skeleton crudApp
@@ -102,7 +102,7 @@ Ejecuto el script SQL:
 
 ### 3. Intalacion de Dependencias necesarias, compilacion de la carpeta `assets` y puesta en marcha
 
-Instalo dependencias que uso como:
+Instalo dependencias que uso:
 
 ```bash
 composer require symfony/http-foundation symfony/routing
@@ -120,7 +120,7 @@ Levanto el Servidor de Desarrollo:
 php -S localhost:8000 -t public
 ```
 
-> [!INFO]
+> [!NOTE]
 >- Pagina de inicio: `http://localhost:8000/`
 >- CRUD de Productos: `http://localhost:8000/product`
 >- CRUD de Categorias: `http://localhost:8000/category`
@@ -130,19 +130,20 @@ php -S localhost:8000 -t public
 
 > [!WARNING]
 > Para instalar y poner en produccion este proyecto en otros ordenadores hay que hacer los siguientes pasos:
+## Configuracion para Desarrollar en otros Entornos de Desarrollo
 
-#### 1. Para instalar las mismas dependencias usadas en este proyecto sin saber cuales se instalaron se generan dos archivos que tienen toda la configuracion se ejecuta asi:
+### 1. Para instalar las mismas dependencias usadas en este proyecto sin saber cuales se instalaron se generan dos archivos que tienen toda la configuracion se ejecuta asi:
    ```bash
    composer install
    ```
 
-#### 2. Compilamos los estilos y los scrips que uso en la aplicacion ubicados en `/assets`
+### 2. Compilamos los estilos y los scrips que uso en la aplicacion ubicados en `/assets`
 
   ```bash
   php bin/console asset-map:compile
   ```
 
-#### 3. Levanto el Servidor de Desarrollo:
+### 3. Levanto el Servidor de Desarrollo:
 
   ```bash
   php -S localhost:8000 -t public
@@ -151,5 +152,5 @@ php -S localhost:8000 -t public
 
 ## Conclusion
 
-Este CRUD es una eficiente para gestionar productos, categorias y ordenes con Symfony y PDO.
+Una aplicacion para gestionar productos, categorias y ordenes con Symfony y PDO.
 
