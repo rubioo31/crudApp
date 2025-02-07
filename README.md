@@ -70,9 +70,23 @@ La estructura del proyecto es la siguiente:
 
 ## Configuracion del Entorno de Desarrollo
 
-### 1. Instalacion de Symfony
+### 1. Instalacion de symfony y Composer
 
-Puedo crear el proyecto utilizando Composer:
+Instalamos Composer desde su pagina original:
+```bash
+https://getcomposer.org/download/
+```
+Usamos PHP de XAMPP para la instalacion y la metemos en la variable PATH del ordenador:
+```bash
+1. WIN + R
+2. sysdm.cpl
+3. Editamos la variable PATH
+4. Añadimos:
+   C:\xampp\php
+5. Reiniciamos la consola para que se apliquen las variables PATH
+```
+
+Puedo crear el proyecto utilizando Composer, vamos al directorio donde queramos y ponemos:
 
 ```bash
 composer create-project symfony/website-skeleton crudApp
@@ -130,9 +144,9 @@ La aplicacion se divide en tres modulos principales:
 - `GET /order/{id}/edit` → Formulario para editar una orden.
 - `POST /order/{id}/delete` → Accion para eliminar una orden.
 
-### Probar y Verificar la Aplicacion
+### Como hice funcionar este proyecto
 
-Instalo paquetes que uso como por ejemplo:
+Instalo dependencias que uso como:
 
 ```bash
 composer require symfony/http-foundation symfony/routing
@@ -159,7 +173,27 @@ Accedo a la Aplicacion:
 
 ---
 
+> [!WARNING]
+> Para instalar y poner en produccion este proyecto en otros ordenadores hay que hacer los siguientes pasos:
+
+ #### 1. Para instalar las mismas dependencias usadas en este proyecto sin saber cuales se instalaron se generan dos archivos que tienen toda la configuracion se ejecuta asi:
+   ```bash
+   composer install
+   ```
+
+#### 2. Compilamos los estilos y los scrips que uso en la aplicacion ubicados en `/assets`
+
+  ```bash
+  php bin/console asset-map:compile
+  ```
+
+#### 3. Levanto el Servidor de Desarrollo:
+
+  ```bash
+  php -S localhost:8000 -t public
+  ```
+
 ## Conclusion
 
-Esta API CRUD me proporciona una solucion eficiente para gestionar productos, categorias y ordenes con Symfony y PDO.
+Este CRUD me proporciona una solucion eficiente para gestionar productos, categorias y ordenes con Symfony y PDO.
 
