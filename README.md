@@ -121,6 +121,7 @@ php -S localhost:8000 -t public
 ```
 
 > [!NOTE]
+> ## Links disponibles crudApp:
 >- Pagina de inicio: `http://localhost:8000/`
 >- CRUD de Productos: `http://localhost:8000/product`
 >- CRUD de Categorias: `http://localhost:8000/category`
