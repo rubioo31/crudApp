@@ -1,157 +1,146 @@
 # API de Gestion de Productos, Categorias y ordenes
 
-Esta aplicacion me permite gestionar los recursos de un sistema de inventario y ventas: **productos**, **categorias** y **ordenes**. La desarrolle en PHP utilizando el framework Symfony y PDO para la conexion a MySQL (sin emplear Doctrine para el mapeo de entidades). La aplicacion esta organizada en controladores y plantillas Twig, y cuenta con assets (CSS y JavaScript) para mejorar la interfaz de usuario.
+Esta aplicacion web permite la gestion de inventario y ventas a traves de un sistema CRUD (**Crear, Leer, Actualizar y Eliminar**) para **productos**, **categorias** y **ordenes**.  
 
-> [!WARNING] 
-> - Ejecuto el script SQL incluido en la carpeta `database` para crear la base de datos y las tablas necesarias.  
-
-> [!NOTE]
-> - La aplicacion utiliza Symfony, por lo que el archivo `public/index.php` actua como front controller. Las rutas definidas en los controladores gestionan las distintas funcionalidades.  
+Fue desarrollada en **PHP** utilizando el framework **Symfony**. Para la base de datos, se usa **PDO** en lugar de Doctrine. La interfaz se renderiza con **Twig**, y los assets como **CSS y JavaScript** estan organizados para mejorar la experiencia de usuario.
 
 > [!IMPORTANT] 
-> - Me aseguro de configurar correctamente las variables de entorno en el archivo `.env` para la conexion a la base de datos.
+> - Antes de ejecutar la aplicacion, es necesario importar el script SQL ubicado en la carpeta `database/` para crear las tablas.
+> - Configurar correctamente el archivo `.env` para la conexion a la base de datos.  
 
 ---
 
 ## Estructura del Proyecto
 
-La estructura del proyecto es la siguiente:
-
-```
+```bash
 /crudApp
 ├── assets
 │   ├── controllers
-│   ├── scrips
-│   |   └── script.js                  # Script para una transicion
+│   ├── scripts
+│   │   └── script.js              # Script para transiciones
 │   └── styles
-|       └── style.css                  # Estilos de todo mi programa
-├── bin
-│   └── ...                            # Archivos de configuracion de Symfony
-├── config
-│   └── ...                            # Archivos de configuracion de Symfony
+│       └── style.css              # Estilos de la aplicacion
+├── bin                            # Archivos de configuracion de Symfony
+├── config                         # Archivos de configuracion de Symfony
 ├── database
-│   └── dbCrudApp.sql                  # Codigo SQL para la creacion de la base de datos y tablas
+│   └── dbCrudApp.sql              # Script SQL para la base de datos
 ├── public
 │   ├── assets
-|   |   ├── scrips                     # Scrips compilados para la aplicacion
-│   │   └── styles                     # Estilos compilados CSS para la aplicacion
-│   └── index.php                      # Front controller de Symfony
+│   │   ├── scripts                # Scripts compilados
+│   │   └── styles                 # Estilos compilados
+│   └── index.php                  # Front controller de Symfony
 ├── src
 │   └── Controller
-│       ├── BaseController.php         # Clase base con la conexion PDO
-│       ├── DefaultController.php      # Controlador para la pagina de inicio
-│       ├── ProductController.php      # CRUD para la entidad "productos"
-│       ├── CategoryController.php     # CRUD para la entidad "categorias"
-│       └── OrderController.php        # CRUD para la entidad "ordenes"
-├── templates
-│   ├── base.html.twig                 # Plantilla base que incluye el menu de navegacion
-│   ├── index.html.twig                # Pagina de inicio de la aplicacion
-│   ├── product
-│   │   ├── index.html.twig            # Listado de productos
-│   │   ├── new.html.twig              # Formulario para crear un nuevo producto
-│   │   ├── edit.html.twig             # Formulario para editar un producto
-│   │   └── show.html.twig             # Detalle de un producto
-│   ├── category
-│   │   ├── index.html.twig            # Listado de categorias
-│   │   ├── new.html.twig              # Formulario para crear una nueva categoria
-│   │   ├── edit.html.twig             # Formulario para editar una categoria
-│   │   └── show.html.twig             # Detalle de una categoria
-│   └── order
-│       ├── index.html.twig            # Listado de ordenes
-│       ├── new.html.twig              # Formulario para crear una nueva orden
-│       ├── edit.html.twig             # Formulario para editar una orden
-│       └── show.html.twig             # Detalle de una orden
-├── .env                      # Variables de entorno (configuracion de la base de datos, etc.)
-├── composer.json             # Dependencias del proyecto
-└── README.md                 # Este archivo
+│       ├── BaseController.php     # Clase base con conexion PDO
+│       ├── DefaultController.php  # Controlador de la pagina de inicio
+│       ├── ProductController.php  # CRUD de productos
+│       ├── CategoryController.php # CRUD de categorias
+│       └── OrderController.php    # CRUD de ordenes
+├── templates                      # Vistas renderizadas con Twig
+│   ├── base.html.twig             # Plantilla base con navegacion
+│   ├── index.html.twig            # Pagina de inicio
+│   ├── product                    # Plantillas para productos
+│   │   ├── index.html.twig        # Listado de productos
+│   │   ├── new.html.twig          # Formulario de creacion
+│   │   ├── edit.html.twig         # Formulario de edicion
+│   │   └── show.html.twig         # Vista de detalles
+│   ├── category                   # Plantillas para categorias
+│   ├── order                      # Plantillas para ordenes
+├── .env                           # Configuracion del entorno
+├── composer.json                   # Dependencias del proyecto
+└── README.md                      # Este archivo
 ```
 
 ---
 
 ## Configuracion del Entorno de Desarrollo
 
-### 1. Instalacion de symfony y Composer
+### 1️⃣ Instalacion de symfony y Composer
 
-Instalamos Composer desde su pagina original:
-```bash
-https://getcomposer.org/download/
-```
-Usamos PHP de XAMPP para la instalacion y la metemos en la variable PATH del ordenador:
+Instalamos Composer desde su [pagina oficial](https://getcomposer.org/download/).
+
+Para asegurarnos de que PHP esta en la variable de entorno `PATH` en Windows:
 ```bash
 1. WIN + R
-2. sysdm.cpl
-3. Editamos la variable PATH
-4. Añadimos:
-   C:\xampp\php
-5. Reiniciamos la consola para que se apliquen las variables PATH
+2. Escribir `sysdm.cpl`
+3. Editar la variable `PATH`
+4. Agregar `C:\xampp\php`
+5. Reiniciar la terminal
 ```
 
-Creo el proyecto utilizando Composer en el directorio que queramos:
+Despues, creamos el proyecto con:
 
 ```bash
 composer create-project symfony/website-skeleton crudApp
 ```
 
-Esto creara la estructura base del proyecto en la carpeta `crudApp`.
+Esto creara la estructura base en la carpeta `crudApp`.
 
-### 2. Configuracion de la Base de Datos
+---
+
+### 2️⃣ Configuracion de la Base de Datos
 
 Ejecuto el script SQL:
 
 - Importo el archivo `database/dbCrudApp.sql` en mi mySQL para crear la base de datos.
 
-### 3. Intalacion de Dependencias necesarias, compilacion de la carpeta `assets` y puesta en marcha
+---
 
-Instalo dependencias que uso:
+### 3️⃣ Instalacion de Dependencias y Compilacion de Assets
+
+Instalar dependencias de Symfony necesarias:
 
 ```bash
 composer require symfony/http-foundation symfony/routing
 ```
 
-Compilo los estilos y los scrips que uso en la aplicacion ubicados en `/assets`
+Compilar los assets (CSS y JavaScript):
 
 ```bash
 php bin/console asset-map:compile
 ```
 
-Levanto el Servidor de Desarrollo:
+---
+
+### 4️⃣ Ejecutar el Servidor de Desarrollo
 
 ```bash
 php -S localhost:8000 -t public
 ```
 
+---
+
 > [!NOTE]
-> ## Links disponibles crudApp:
->- Pagina de inicio: `http://localhost:8000/`
->- CRUD de Productos: `http://localhost:8000/product`
->- CRUD de Categorias: `http://localhost:8000/category`
->- CRUD de ordenes: `http://localhost:8000/order`
+> ## Endpoints Disponibles
+> La aplicacion se ejecuta en `http://localhost:8000/`
+>- **Pagina de inicio**: [`http://localhost:8000/`](http://localhost:8000/)
+>- **CRUD de Productos**: [`http://localhost:8000/product`](http://localhost:8000/product)
+>- **CRUD de Categorias**: [`http://localhost:8000/category`](http://localhost:8000/category)
+>- **CRUD de ordenes**: [`http://localhost:8000/order`](http://localhost:8000/order)
 
 ---
 
-> [!WARNING]
-> Para instalar y poner en produccion este proyecto en otros ordenadores hay que hacer los siguientes pasos:
-## Configuracion para Desarrollar en otros Entornos de Desarrollo
+## Despliegue en otro Entorno
+Para instalar las mismas dependencias en otro sistema:
 
-### 1. Para instalar las mismas dependencias usadas en este proyecto sin saber cuales se instalaron se generan dos archivos que tienen toda la configuracion se ejecuta asi:
-   ```bash
-   composer install
-   ```
+```bash
+composer install
+```
 
-### 2. Compilamos los estilos y los scrips que uso en la aplicacion ubicados en `/assets`
+Compilar los assets nuevamente:
 
-  ```bash
-  php bin/console asset-map:compile
-  ```
+```bash
+php bin/console asset-map:compile
+```
 
-### 3. Levanto el Servidor de Desarrollo:
+Ejecutar el servidor:
 
-  ```bash
-  php -S localhost:8000 -t public
-  ```
+```bash
+php -S localhost:8000 -t public
+```
+
 ---
 
 ## Conclusion
 
-Una aplicacion para gestionar productos, categorias y ordenes con Symfony y PDO.
-
+Este proyecto es un sistema de gestion de productos, categorias y ordenes desarrollado en **Symfony** con **Twig** y **PDO** para la conexion a MySQL. Se puede usar para cualquier aplicacion que requiera administracion de inventario y pedidos.

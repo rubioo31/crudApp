@@ -5,7 +5,7 @@ DROP DATABASE IF EXISTS crudApp;
 CREATE DATABASE crudApp;
 USE crudApp;
 
--- Crear tabla de categorías
+-- Crear tabla de categorias
 CREATE TABLE categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL
